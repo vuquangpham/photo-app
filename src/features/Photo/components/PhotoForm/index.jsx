@@ -1,13 +1,12 @@
 import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
-import Images from 'constants/images';
 import InputField from 'custom-fields/InputField';
 import RandomPhotoField from 'custom-fields/RandomPhotoField';
 import SelectField from 'custom-fields/SelectField';
 import { FastField, Form, Formik } from 'formik';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, FormGroup, Label } from 'reactstrap';
-
+import { Button, FormGroup, Spinner } from 'reactstrap';
+import * as Yup from 'yup'
 
 PhotoForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -21,15 +20,26 @@ function PhotoForm(props) {
     const initialValues = {
         title: '',
         categoryId: null,
-        randomphoto: null,
+        photo: '',
     }
+
+    const validationSchema = Yup.object().shape({
+        title: Yup.string().required('This field is required.'),
+
+        categoryId: Yup.number().required('This field is required.').nullable(),
+
+        photo: Yup.string().required('This field is required.')
+    })
+
     return (
         <Formik
             initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={props.onSubmit}
         >
             {formikProps => {
                 // do something here ...
-                const { values, errors, touched } = formikProps;
+                const { values, errors, touched, isSubmitting } = formikProps;
                 console.log({ values, errors, touched });
 
                 return (
@@ -52,22 +62,16 @@ function PhotoForm(props) {
                         />
 
                         <FastField
-                            name="randomphoto"
+                            name="photo"
                             component={RandomPhotoField}
 
                             label="Random Photo"
                         />
 
                         <FormGroup>
-                            <Label for="categoryId">Photo</Label>
-                            <div><Button type="button" outline color="primary">Random Photo</Button></div>
-                            <div>
-                                <img src={Images.COLORFUL_BG} alt="colorful" width="200px" height="200px" />
-                            </div>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Button color="primary">Add to album</Button>
+                            <Button type="submit" color="primary">
+                                {isSubmitting && <Spinner size="sm" />}
+                                Add to album</Button>
                         </FormGroup>
                     </Form>
                 )
