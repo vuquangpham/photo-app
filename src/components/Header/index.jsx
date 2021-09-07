@@ -10,7 +10,7 @@ function Header(props) {
             <Container>
                 <Row className="justify-content-between">
                     <Col xs="auto">
-                        <a  
+                        <a
                             className="header__link header__title"
                             href="/"
                             target="_blank"
@@ -28,7 +28,7 @@ function Header(props) {
                             activeClassName="header__link--active"
                         >
                             Redux Project
-                        </NavLink>    
+                        </NavLink>
                     </Col>
 
                 </Row>

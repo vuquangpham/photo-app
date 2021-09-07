@@ -4,6 +4,7 @@ import { addPhoto } from 'features/Photo/PhotoSlice';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Container } from 'reactstrap';
 
 import './style.scss'
 
@@ -27,10 +28,12 @@ function AddEditPage(props) {
     return (
         <div className="photo-edit">
             <Banner title="Pick your amazing photo 🤩" />
+            <Container>
 
-            <div className="photo-edit__form">
-                <PhotoForm onSubmit={handleSubmit} />
-            </div>
+                <div className="photo-edit__form">
+                    <PhotoForm onSubmit={handleSubmit} />
+                </div>
+            </Container>
         </div>
     );
 }

@@ -1,5 +1,4 @@
 import RandomPhoto from 'components/RandomPhoto';
-import { ErrorMessage } from 'formik';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { FormFeedback, FormGroup, Label } from 'reactstrap';
