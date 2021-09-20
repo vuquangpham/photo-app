@@ -11,16 +11,13 @@ function MainPage(props) {
     const photos = useSelector(state => state.photos)
     const dispatch = useDispatch();
     const history = useHistory();
-    console.log('List of photos: ', photos);
 
     const handlePhotoEditClick = (photo) => {
-        console.log('Edit', photo);
         const editPhotoUrl = `photos/${photo.id}`;
         history.push(editPhotoUrl)
     }
 
     const handlePhotoRemoveClick = (photo) => {
-        console.log('Remove', photo);
         const removePhotoId = photo.id;
         const action = removePhoto(removePhotoId);
         dispatch(action)
